@@ -6,7 +6,7 @@ import "./App.css";
 
 class App extends Component {
   state = {
-    show: "home"
+    show: "trivia"
   };
 
   //Change display state
@@ -36,21 +36,23 @@ class App extends Component {
     // basic nav
     let nav = (
       <nav>
-        <ul>
-          <li>
-            <button onClick={() => this.displayHandler("home")}>Home</button>
-          </li>
-          <li>
-            <button onClick={() => this.displayHandler("trivia")}>
-              Trivia
-            </button>
-          </li>
-          <li>
-            <button onClick={() => this.displayHandler("summary")}>
-              Summary
-            </button>
-          </li>
-        </ul>
+        <div className="nav-links">
+          <div className="nav-home">
+            <a onClick={() => this.displayHandler("home")}>Home</a>
+          </div>
+          <div className="nav-links-right">
+            <div className="nav-trivia">
+              <a onClick={() => this.displayHandler("trivia")}>
+                Trivia
+              </a>
+            </div>
+            <div className="nav-summary">
+              <a onClick={() => this.displayHandler("summary")}>
+                Summary
+              </a>
+            </div>
+          </div>
+        </div>
       </nav>
     );
 
