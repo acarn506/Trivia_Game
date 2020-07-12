@@ -1,0 +1,28 @@
+.genre {
+    text-align: center;
+}
+
+.q-and-a {
+    width: 40%;
+    min-width: 400px;
+    max-width: 800px;
+    margin: auto;
+    border: 2px solid black
+}
+
+.question {
+    text-align: center;
+}
+
+.all-answers {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.answer {
+    height: 50px;
+    width: 40%;
+    margin: 15px auto;
+    background-color: yellow;
+}
