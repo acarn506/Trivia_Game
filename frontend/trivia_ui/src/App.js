@@ -4,9 +4,16 @@ import Summary from "./Pages/Summary/Summary";
 import Trivia from "./Pages/Trivia/Trivia";
 import "./App.css";
 
+//enum to avoid hard coded strings
+const show = {
+  HOME: "home",
+  TRIVIA: "trivia",
+  SUMMARY: "summary"
+};
+
 class App extends Component {
   state = {
-    show: "trivia"
+    show: show.TRIVIA
   };
 
   //Change display state
@@ -20,13 +27,13 @@ class App extends Component {
     let display = null;
     // render display based on show state
     switch (this.state.show) {
-      case "home":
+      case show.HOME:
         display = <Home />;
         break;
-      case "trivia":
+      case show.TRIVIA:
         display = <Trivia />;
         break;
-      case "summary":
+      case show.SUMMARY:
         display = <Summary />;
         break;
       default:
@@ -38,16 +45,16 @@ class App extends Component {
       <nav>
         <div className="nav-links">
           <div className="nav-home">
-            <a onClick={() => this.displayHandler("home")}>Home</a>
+            <a onClick={() => this.displayHandler(show.HOME)}>Home</a>
           </div>
           <div className="nav-links-right">
             <div className="nav-trivia">
-              <a onClick={() => this.displayHandler("trivia")}>
+              <a onClick={() => this.displayHandler(show.TRIVIA)}>
                 Trivia
               </a>
             </div>
             <div className="nav-summary">
-              <a onClick={() => this.displayHandler("summary")}>
+              <a onClick={() => this.displayHandler(show.SUMMARY)}>
                 Summary
               </a>
             </div>
