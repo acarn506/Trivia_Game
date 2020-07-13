@@ -7,22 +7,29 @@
     min-width: 400px;
     max-width: 800px;
     margin: auto;
-    border: 2px solid black
 }
 
 .question {
     text-align: center;
 }
 
-.all-answers {
+.all-choices {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
 
-.answer {
+.choice {
     height: 50px;
     width: 40%;
     margin: 15px auto;
     background-color: yellow;
+}
+
+.wrong-answer {
+    background-color: red;
+}
+
+.correct-answer {
+    background-color: green;
 }
