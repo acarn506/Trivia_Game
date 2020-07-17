@@ -81,7 +81,7 @@ let finishedButtons = this.state.buttons.map((button, index)=>{
     <div>
       <h1 className="genre">Genre: Sports</h1>
       <div className="q-and-a">
-        <h3 className="question">Who is the best football team of all time?</h3>
+        <h3 className="question">Which of these teams appeared in a Super Bowl first?</h3>
           <div className="all-choices">
           {finishedButtons}
           </div>
@@ -92,3 +92,29 @@ let finishedButtons = this.state.buttons.map((button, index)=>{
 }
 
 export default Trivia;
+
+/* Question: Before the Golden State Warriors, who was the last team to appear in five straight NBA finals?
+A. Boston Celtics
+B. Chicago Bulls
+C. Los Angeles Lakers
+D. San Antonio Spurs
+
+Answer: Boston Celtics
+
+Question: Who won the very first MLS Cup?
+A. Chicago Fire
+B. D.C. United
+C. Houston Dynamo
+D. LA Galaxy
+
+Answer: D.C. United
+
+Question: After the New York Yankees, who has won the most World Series?
+A. St. Louis Cardinals
+B. Boston Red Sox
+C. New York/San Francisco Giants
+D. Brooklyn/Los Angeles Dodgers
+
+Answer: St. Louis Cardinals
+
+*/
