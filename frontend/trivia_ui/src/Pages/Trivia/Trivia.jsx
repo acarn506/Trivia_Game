@@ -14,6 +14,9 @@ const normalColor = {
 
 class Trivia extends Component {
     state = {
+
+      questions: 'Which of these teams appeared in a Super Bowl first?',
+
       buttons : [ 
         {
           name : 'New England Patriots',
@@ -81,7 +84,7 @@ let finishedButtons = this.state.buttons.map((button, index)=>{
     <div>
       <h1 className="genre">Genre: Sports</h1>
       <div className="q-and-a">
-        <h3 className="question">Which of these teams appeared in a Super Bowl first?</h3>
+        <h3 className="question">{this.state.questions}</h3>
           <div className="all-choices">
           {finishedButtons}
           </div>
