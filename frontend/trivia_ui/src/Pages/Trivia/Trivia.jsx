@@ -1,16 +1,20 @@
-import React, { Component }  from "react";
+import React, { Component } from "react";
 import "./Trivia.css";
+import axios from "axios";
+
+let host = "http://localhost";
+let port = "4000";
 
 const wrongColor = {
-  background : "red"
-}
+  background: "red"
+};
 const rightColor = {
-  background : "green"
-}
+  background: "green"
+};
 
 const normalColor = {
-  background : "yellow"
-}
+  background: "yellow"
+};
 
 class Trivia extends Component {
     state = {
@@ -41,26 +45,42 @@ class Trivia extends Component {
       ]
     }
 
-    correctChoice = (index) => {
-      let buttonIndex = this.state.buttons.findIndex((button)=>{
-        return index === button.key
-      })
-      let copyButtons = [...this.state.buttons] 
-      copyButtons[buttonIndex].buttonColor = rightColor
+  correctChoice = index => {
+    let buttonIndex = this.state.buttons.findIndex(button => {
+      return index === button.key;
+    });
+    let copyButtons = [...this.state.buttons];
+    copyButtons[buttonIndex].buttonColor = rightColor;
+    this.setState({
+      buttons: copyButtons
+    });
+  };
+
+  incorrectChoice = index => {
+    let buttonIndex = this.state.buttons.findIndex(button => {
+      return index === button.key;
+    });
+    let copyButtons = [...this.state.buttons];
+    copyButtons[buttonIndex].buttonColor = wrongColor;
+    this.setState({
+      buttons: copyButtons
+    });
+  };
+
+  // API Requests
+  // post to /question
+  async getPosts() {
+    const response = await axios.get(`${host}:${port}/posts/question/`);
+    try {
+      const questionInfo = response.data;
       this.setState({
-        buttons:copyButtons
-      })
-    }
-    
-    incorrectChoice = (index) => {
-      let buttonIndex = this.state.buttons.findIndex((button)=>{
-        return index === button.key
-      })
-      let copyButtons = [...this.state.buttons] 
-      copyButtons[buttonIndex].buttonColor = wrongColor
-      this.setState({
-        buttons:copyButtons
-      })
+        question: questionInfo.question,
+        buttons: questionInfo.choices,
+        answer: questionInfo.answer,
+        isLoading: false
+      });
+    } catch (error) {
+      this.setState({ error, isLoading: false });
     }
     
     render() {
@@ -90,8 +110,8 @@ let finishedButtons = this.state.buttons.map((button, index)=>{
           </div>
         </div>
       </div>
-  );
-};
+    );
+  }
 }
 
 export default Trivia;
