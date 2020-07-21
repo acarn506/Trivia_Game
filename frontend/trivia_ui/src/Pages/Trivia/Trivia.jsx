@@ -87,7 +87,7 @@ class Trivia extends Component {
 
   let rightAnswer = 'Oakland Raiders'
 
-let finishedButtons = this.state.buttons.map((button, index)=>{
+  let finishedButtons = this.state.buttons.map((button, index)=>{
   return ( 
     <React.Fragment>
       { button.name === rightAnswer 
