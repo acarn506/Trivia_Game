@@ -1,13 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
-//secure env connection
-require("dotenv/config");
 const bodyParser = require("body-parser");
-
+const cors = require("cors");
 const app = express();
+require("dotenv/config"); //secure env connection
 
 //parse all incoming json
 app.use(bodyParser.json());
+//share resources across other domains
+app.use(cors());
 
 //import routes
 const postRoute = require("./routes/posts");
