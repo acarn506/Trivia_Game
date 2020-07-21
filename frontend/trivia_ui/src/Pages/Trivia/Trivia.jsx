@@ -17,31 +17,33 @@ const normalColor = {
 };
 
 class Trivia extends Component {
-  state = {
-    buttons: [
-      {
-        name: "New England Patriots",
-        buttonColor: normalColor,
-        key: 0
-      },
-      {
-        name: "Pittsburgh Steelers",
-        buttonColor: normalColor,
-        key: 1
-      },
-      {
-        name: "Dallas Cowboys",
-        buttonColor: normalColor,
-        key: 2
-      },
-      {
-        name: "Oakland Raiders",
-        buttonColor: normalColor,
-        key: 3
-      }
-    ],
-    answer: ""
-  };
+    state = {
+
+      questions: 'Which of these teams appeared in a Super Bowl first?',
+
+      buttons : [ 
+        {
+          name : 'New England Patriots',
+          buttonColor : normalColor,
+          key : 0
+        },
+        {
+          name : 'Pittsburgh Steelers',
+          buttonColor : normalColor,
+          key : 1
+        },
+        {
+          name : 'Dallas Cowboys',
+          buttonColor : normalColor,
+          key : 2
+        },
+        {
+          name : 'Oakland Raiders',
+          buttonColor : normalColor,
+          key : 3
+        }
+      ]
+    }
 
   correctChoice = index => {
     let buttonIndex = this.state.buttons.findIndex(button => {
@@ -80,45 +82,32 @@ class Trivia extends Component {
     } catch (error) {
       this.setState({ error, isLoading: false });
     }
-  }
+    
+    render() {
 
-  render() {
-    let rightAnswer = "Oakland Raiders"; // this.state.answer
+  let rightAnswer = 'Oakland Raiders'
 
-    let finishedButtons = this.state.buttons.map((button, index) => {
-      return (
-        <React.Fragment>
-          {button.name === rightAnswer ? (
-            <button
-              key={button.key}
-              style={button.buttonColor}
-              onClick={() => this.correctChoice(index)}
-              className="choice"
-            >
-              {button.name}
-            </button>
-          ) : (
-            <button
-              key={button.key}
-              style={button.buttonColor}
-              onClick={() => this.incorrectChoice(index)}
-              className="choice"
-            >
-              {button.name}
-            </button>
-          )}
-        </React.Fragment>
-      );
-    });
+  let finishedButtons = this.state.buttons.map((button, index)=>{
+  return ( 
+    <React.Fragment>
+      { button.name === rightAnswer 
+        ?
+        <button key= {button.key} style={button.buttonColor} onClick= {() =>  this.correctChoice(index)} className="choice">{button.name}</button>
+        :         
+        <button key= {button.key} style={button.buttonColor} onClick= {() =>  this.incorrectChoice(index)} className="choice">{button.name}</button>
+      }
+    </React.Fragment>
+  )
+})   
 
-    return (
-      <div>
-        <h1 className="genre">Genre: Sports</h1>
-        <div className="q-and-a">
-          <h3 className="question">
-            Which of these teams appeared in a Super Bowl first?
-          </h3>
-          <div className="all-choices">{finishedButtons}</div>
+  return (
+    <div>
+      <h1 className="genre">Genre: Sports</h1>
+      <div className="q-and-a">
+        <h3 className="question">{this.state.questions}</h3>
+          <div className="all-choices">
+          {finishedButtons}
+          </div>
         </div>
       </div>
     );
