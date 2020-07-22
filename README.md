@@ -7,3 +7,5 @@ A fast pace trivia game with new and old questions where your stats are saved to
 ##### Enumerations with JavaScript 
 - https://www.sohamkamani.com/blog/2017/08/21/enums-in-javascript/
 
+##### Cors Package 
+https://www.npmjs.com/package/cors#simple-usage-enable-all-cors-requests
