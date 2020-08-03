@@ -13,11 +13,19 @@ router.get("/questions", async (req, res) => {
 });
 
 //get back specific question
-router.get("/question/:key");
+router.get("/question/:category", async (req, res) => {
+  try {
+    const post = await Post.find({}, { category: req.params.category });
+    res.json(post);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
 
 // Post for saving Questions
 router.post("/question", async (req, res) => {
   const post = new Post({
+    category: req.body.category,
     question: req.body.question,
     choices: req.body.choices,
     answer: req.body.answer,
