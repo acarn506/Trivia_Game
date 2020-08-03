@@ -11,11 +11,14 @@ export const randGenerator = length => {
 
 // API Requests
 // get request to /question/:key
-export const getPosts = async ranNum => {
-  const response = await axios.get(`${host}:${port}/posts/question/:${ranNum}`);
+export const getPosts = async category => {
+  const response = await axios.get(
+    `${host}:${port}/posts/questions/:${category}`
+  );
   try {
     const questionInfo = response.data;
     this.setState({
+      category: questionInfo.category,
       question: questionInfo.question,
       buttons: questionInfo.choices,
       answer: questionInfo.answer,

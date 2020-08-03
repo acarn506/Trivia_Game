@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import "./Trivia.css";
-import axios from "axios";
-
-let host = "http://localhost";
-let port = "4000";
+import { randGenerator } from "./QuestionAPI";
+import { getPosts } from "./QuestionAPI";
 
 const wrongColor = {
   background: "red"
@@ -41,7 +39,10 @@ class Trivia extends Component {
         buttonColor: normalColor,
         key: 3
       }
-    ]
+    ],
+    length: 5,
+    category: "sports",
+    key: 2
   };
 
   correctChoice = index => {
@@ -65,23 +66,6 @@ class Trivia extends Component {
       buttons: copyButtons
     });
   };
-
-  // API Requests
-  // post to /question
-  async getPosts() {
-    const response = await axios.get(`${host}:${port}/posts/question/`);
-    try {
-      const questionInfo = response.data;
-      this.setState({
-        question: questionInfo.question,
-        buttons: questionInfo.choices,
-        answer: questionInfo.answer,
-        isLoading: false
-      });
-    } catch (error) {
-      this.setState({ error, isLoading: false });
-    }
-  }
 
   render() {
     let rightAnswer = "Oakland Raiders";
@@ -119,6 +103,7 @@ class Trivia extends Component {
           <h3 className="question">{this.state.questions}</h3>
           <div className="all-choices">{finishedButtons}</div>
         </div>
+        <button onClick={() => getPosts(this.state.category)}>Test API</button>
       </div>
     );
   }
