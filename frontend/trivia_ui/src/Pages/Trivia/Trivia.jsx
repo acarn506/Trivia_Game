@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Trivia.css";
 import { randGenerator } from "./QuestionAPI";
+import { getPosts } from "./QuestionAPI";
 
 const wrongColor = {
   background: "red"
@@ -39,7 +40,9 @@ class Trivia extends Component {
         key: 3
       }
     ],
-    length: 5
+    length: 5,
+    category: "sports",
+    key: 2
   };
 
   correctChoice = index => {
@@ -100,6 +103,7 @@ class Trivia extends Component {
           <h3 className="question">{this.state.questions}</h3>
           <div className="all-choices">{finishedButtons}</div>
         </div>
+        <button onClick={() => getPosts(this.state.category)}>Test API</button>
       </div>
     );
   }
