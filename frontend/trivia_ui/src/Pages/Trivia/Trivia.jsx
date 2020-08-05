@@ -126,6 +126,15 @@ class Trivia extends Component {
 
 export default Trivia;
 
+/* 
+let shownQuestions =[]
+
+while (questions.length > 0){
+    let randomNumber = Math.floor(Math.random() * questions.length);
+    shownQuestions.push(deck[randomNumber]);
+    deck.splice(randomNumber, 1);
+*/
+
 /* Question: Before the Golden State Warriors, who was the last team to appear in five straight NBA finals?
 A. Boston Celtics
 B. Chicago Bulls
