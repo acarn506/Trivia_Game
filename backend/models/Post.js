@@ -11,9 +11,7 @@ const QuestionSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  choices: {
-    choices: [{ name: String, buttonColor: String, key: Number }]
-  },
+  choices: [String],
   answer: {
     type: String,
     required: true
