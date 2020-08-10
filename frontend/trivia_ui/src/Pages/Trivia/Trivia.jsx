@@ -1,24 +1,17 @@
 import React, { Component } from "react";
 import "./Trivia.css";
-import { randGenerator } from "./QuestionAPI";
-import { getPosts } from "./QuestionAPI";
+import { randGenerator, questionPicker } from "./QuestionAPI";
+import Question from "./Question/Question.jsx";
+import axios from "axios";
+//import { getPosts } from "./QuestionAPI";
 
-const wrongColor = {
-  background: "red"
-};
-const rightColor = {
-  background: "green"
-};
-
-const normalColor = {
-  background: "yellow"
-};
+let host = "http://localhost";
+let port = "5000";
 
 class Trivia extends Component {
   state = {
-    questions: "Which of these teams appeared in a Super Bowl first?",
-
-    buttons: [
+    questions: [],
+    /*buttons: [
       {
         name: "New England Patriots",
         buttonColor: normalColor,
@@ -39,35 +32,53 @@ class Trivia extends Component {
         buttonColor: normalColor,
         key: 3
       }
-    ],
-    length: 5,
+    ]*/
+    length: null,
     category: "sports",
-    key: 2
+    play: false,
+    gameOver: false,
+    error: false,
+    isLoading: false,
+    questionNumber: 1
   };
 
-  correctChoice = index => {
-    let buttonIndex = this.state.buttons.findIndex(button => {
-      return index === button.key;
-    });
-    let copyButtons = [...this.state.buttons];
-    copyButtons[buttonIndex].buttonColor = rightColor;
+  startTrivia = async category => {
     this.setState({
-      buttons: copyButtons
+      isLoading: true
+    });
+
+    const response = await axios.get(
+      `${host}:${port}/posts/questions/${category}`
+    );
+    try {
+      console.log("Success!");
+      const questionInfo = response.data;
+      this.setState({
+        questions: questionInfo,
+        length: questionInfo.length,
+        isLoading: false
+      });
+      //this.check();
+    } catch (error) {
+      console.log(error);
+      this.setState({ error, isLoading: false });
+    }
+
+    this.setState({
+      play: true
     });
   };
 
-  incorrectChoice = index => {
-    let buttonIndex = this.state.buttons.findIndex(button => {
-      return index === button.key;
-    });
-    let copyButtons = [...this.state.buttons];
-    copyButtons[buttonIndex].buttonColor = wrongColor;
-    this.setState({
-      buttons: copyButtons
-    });
-  };
+  /*check = () => {
+    console.log("questions", this.state.questions);
+    console.log("length", this.state.length);
+    console.log("category", this.state.category);
+  }; */
+
+  componentDidMount() {}
 
   render() {
+    /*
     let rightAnswer = "Oakland Raiders";
 
     let finishedButtons = this.state.buttons.map((button, index) => {
@@ -94,16 +105,25 @@ class Trivia extends Component {
           )}
         </React.Fragment>
       );
-    });
+    });  */
+
+    let currQuestion = questionPicker(
+      this.state.questions,
+      this.state.questionNumber
+    );
 
     return (
       <div>
         <h1 className="genre">Genre: Sports</h1>
         <div className="q-and-a">
-          <h3 className="question">{this.state.questions}</h3>
-          <div className="all-choices">{finishedButtons}</div>
+          <button onClick={() => this.startTrivia(this.state.category)}>
+            Start
+          </button>
+          {this.state.isLoading ? <p>Loading Questions...</p> : null}
+          {/*<h3 className="question">{this.state.questions}</h3> */}
+          <div className="all-choices">{}</div>
+          {this.state.play ? <Question choices={currQuestion.choices} /> : null}
         </div>
-        <button onClick={() => getPosts(this.state.category)}>Test API</button>
       </div>
     );
   }

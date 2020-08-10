@@ -1,31 +1,44 @@
 // A few functions to fetch questions from backend
-import axios from "axios";
+import React from "react";
 
-let host = "http://localhost";
-let port = "4000";
-
-// Random function
-export const randGenerator = length => {
-  return Math.floor(Math.random() * Math.floor(length));
+const wrongColor = {
+  background: "red"
+};
+const rightColor = {
+  background: "green"
 };
 
-// API Requests
-// get request to /question/:key
-export const getPosts = async category => {
-  const response = await axios.get(
-    `${host}:${port}/posts/questions/:${category}`
-  );
-  try {
-    const questionInfo = response.data;
-    this.setState({
-      category: questionInfo.category,
-      question: questionInfo.question,
-      buttons: questionInfo.choices,
-      answer: questionInfo.answer,
-      key: questionInfo.key,
-      isLoading: false
-    });
-  } catch (error) {
-    this.setState({ error, isLoading: false });
-  }
+const normalColor = {
+  background: "yellow"
+};
+
+// Random function
+export const shuffleQuestions = questions => {
+  return questions.sort(() => Math.random() - 0.5);
+};
+
+// Function to add choices to buttons
+export const createButtons = choices => {
+  choices.map((choice, index) => {
+    return (
+      <React.Fragment>
+        <button
+          key={index}
+          style={normalColor}
+          onClick={() => ""}
+          className="choice"
+        >
+          {choice}
+        </button>
+        )}
+      </React.Fragment>
+    );
+  });
+};
+
+export const questionPicker = (questions, questionNumber) => {
+  let result = questions.find((question, index) => {
+    return index === questionNumber;
+  });
+  return result;
 };

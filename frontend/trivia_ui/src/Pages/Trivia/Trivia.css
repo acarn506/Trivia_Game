@@ -1,35 +1,28 @@
 .genre {
-    text-align: center;
+  text-align: center;
 }
 
 .q-and-a {
-    width: 40%;
-    min-width: 400px;
-    max-width: 800px;
-    margin: auto;
+  width: 40%;
+  min-width: 400px;
+  max-width: 800px;
+  margin: auto;
 }
 
 .question {
-    text-align: center;
+  text-align: center;
 }
 
 .all-choices {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-.choice {
-    height: 50px;
-    width: 40%;
-    margin: 15px auto;
-    background-color: yellow;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .wrong-answer {
-    background-color: red;
+  background-color: red;
 }
 
 .correct-answer {
-    background-color: green;
+  background-color: green;
 }
